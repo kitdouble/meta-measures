@@ -55,9 +55,9 @@ meta_measures <- function(response = "response", accuracy = "correct", confidenc
   ## sensitivity (SSE) ----------------------------------------------------------------
   if (sse) {
     
+    for (subject_id in unique(data$subject)) {
     tryCatch({ 
       
-      for (subject_id in unique(data$subject)) {
         
         # Subset data for the current subject
         subject_data <- subset(data, data$subject == subject_id)
@@ -74,10 +74,10 @@ meta_measures <- function(response = "response", accuracy = "correct", confidenc
         meta_results[meta_results$subject == subject_id, "sensitivity_sse"] <- fit$meta_da[1]
         meta_results[meta_results$subject == subject_id, "da"] <- fit$da[1]
         
-      }
+     
       
     }, error = function(e) {
-    })
+    }) }
   }
   
   
@@ -85,9 +85,9 @@ meta_measures <- function(response = "response", accuracy = "correct", confidenc
   ## sensitivity (MLE) ----------------------------------------------------------------
   if (mle) {
     
+    for (subject_id in unique(data$subject)) {
     tryCatch({ 
       
-      for (subject_id in unique(data$subject)) {
         
         # Subset data for the current subject
         subject_data <- subset(data, data$subject == subject_id)
@@ -104,10 +104,10 @@ meta_measures <- function(response = "response", accuracy = "correct", confidenc
         meta_results[meta_results$subject == subject_id, "sensitivity_mle"] <- fit$meta_da[1]
         meta_results[meta_results$subject == subject_id, "da"] <- fit$da[1]
         
-      }
+      
       
     }, error = function(e) {
-    })
+    })}
   }
   
   
@@ -115,9 +115,9 @@ meta_measures <- function(response = "response", accuracy = "correct", confidenc
   ## sensitivity (hierarchical) ----------------------------------------------------------------
   if (hier) {
     
+    for (subject_id in unique(data$subject)) {
     tryCatch({ 
       
-      for (subject_id in unique(data$subject)) {
         
         # Subset data for the current subject
         subject_data <- subset(data, data$subject == subject_id)
@@ -142,10 +142,10 @@ meta_measures <- function(response = "response", accuracy = "correct", confidenc
         meta_results[meta_results$subject == subject_id, "sensitivity_hier"] <- stat$mean[stat$name == "meta_d"]
         meta_results[meta_results$subject == subject_id, "da"] <- bfit[[2]]$d1
         
-      }
+     
       
     }, error = function(e) {
-    })
+    }) }
   }
   
   
