@@ -1,5 +1,5 @@
 # meta-measures
-Calculate measures of metacognitive monitoring for 2AFC tasks
+Calculate measures of metacognitive monitoring (gamma, discrimination, SDT sensitivity Hierachical sensitivity)
 
 HMeta-d-master folder should be download and included in the working directory.
 
