@@ -6,6 +6,7 @@ meta_measures <- function(response = "response", accuracy = "correct", confidenc
   
   # packages
   require(metaSDT)
+  require(Hmisc)
   
   # set up data frame
   if(sse | mle | hier) {
