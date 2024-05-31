@@ -22,18 +22,18 @@ meta_measures <- function(response = "response", accuracy = "correct", confidenc
   
   
 
-  ## kendall Correlation ----------------------------------------------------------------
+  ## gamma Correlation ----------------------------------------------------------------
   
   # Loop through each subject
   for (subject_id in unique(data$subject)) {
     # Subset data for the current subject
     subject_data <- subset(data, data$subject == subject_id)
     
-    # Calculate gamma correlation
-    gamma <- cor(subject_data$confidence, subject_data$accuracy , method = "kendall")
+    # Calculate gamma correlation(s)
+    gamma <- rcorr.cens(subject_data$accuracy, subject_data$confidence, outx = TRUE)[2]
     
     # Add the result to the results data frame
-    meta_results <- rbind(meta_results, data.frame(subject = subject_id, kendall_correlation = gamma))
+    meta_results <- rbind(meta_results, data.frame(subject = subject_id, gamma_correlation = gamma))
   }
   
   ## Discrimination ----------------------------------------------------------------
@@ -155,7 +155,7 @@ meta_measures <- function(response = "response", accuracy = "correct", confidenc
   conf_data <- setNames(aggregate(confidence ~ subject, data, mean),c("subject", "mean_conf"))
   
   # Merge
-  meta_results <- merge(meta_results, conf_data[,c("subject", "mean_conf")], by = "subject")
+  meta_results <- merge(meta_results, conf_data[,c("subject", "mean_conf")], by = "subject", all = T)
   
   
   
@@ -165,7 +165,7 @@ meta_measures <- function(response = "response", accuracy = "correct", confidenc
   conf_data <- setNames(aggregate(confidence ~ subject, data, var),c("subject", "var_conf"))
   
   # Merge
-  meta_results <- merge(meta_results, conf_data[,c("subject", "var_conf")], by = "subject")
+  meta_results <- merge(meta_results, conf_data[,c("subject", "var_conf")], by = "subject", all = T)
   
   
   
@@ -175,7 +175,7 @@ meta_measures <- function(response = "response", accuracy = "correct", confidenc
   acc_data <- setNames(aggregate(accuracy ~ subject, data, mean),c("subject", "mean_acc"))
   
   # Merge
-  meta_results <- merge(meta_results, acc_data[,c("subject", "mean_acc")], by = "subject")
+  meta_results <- merge(meta_results, acc_data[,c("subject", "mean_acc")], by = "subject", all = T)
   
   
   # Print the results
