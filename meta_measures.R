@@ -7,6 +7,7 @@ meta_measures <- function(response = "response", accuracy = "correct", confidenc
   # packages
   require(metaSDT)
   require(Hmisc)
+  source("HMeta-d-master/R/fit_metad_indiv.R")
   
   # set up data frame
   if(sse | mle | hier) {
